@@ -5,96 +5,97 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Javascript Calculator</title>
+    <link rel="stylesheet" type="text/css" href="calc.css"/>
 </head>
 <body>
-    <div>
-        <div>
+    <div class="container">
+        <div class="calc-box">
             <table border="1">
                 <tr>
-                    <td colspan="5">
-                        <span>DISPLAY</span>
+                    <td colspan="5" id="display">
+                        <span id="result">0</span>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <span>e</span>
+                        <span id="e">e</span>
                     </td>
                     <td>
-                        <span>pi</span>
+                        <span id="pi">pi</span>
                     </td>
                     <td>
-                        <span>abs</span>
+                        <span id="abs">abs</span>
                     </td>
                     <td>
-                        <span>round</span>
+                        <span id="round">round</span>
                     </td>
                     <td>
-                        <span>%</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <span>1</span>
-                    </td>
-                    <td>
-                        <span>2</span>
-                    </td>
-                    <td>
-                        <span>3</span>
-                    </td>
-                    <td>
-                        <span>**</span>
-                    </td>
-                    <td>
-                        <span>sqrt</span>
+                        <span id="modulo">%</span>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <span>4</span>
+                        <span id="num1">1</span>
                     </td>
                     <td>
-                        <span>5</span>
+                        <span id="num2">2</span>
                     </td>
                     <td>
-                        <span>6</span>
+                        <span id="num3">3</span>
                     </td>
                     <td>
-                        <span>+</span>
+                        <span id="exp">**</span>
                     </td>
                     <td>
-                        <span>*</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <span>7</span>
-                    </td>
-                    <td>
-                        <span>8</span>
-                    </td>
-                    <td>
-                        <span>9</span>
-                    </td>
-                    <td>
-                        <span>-</span>
-                    </td>
-                    <td>
-                        <span>/</span>
+                        <span id="sqrt">sqrt</span>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <span>C</span>
+                        <span id="num4">4</span>
                     </td>
                     <td>
-                        <span>0</span>
+                        <span id="num5">5</span>
                     </td>
                     <td>
-                        <span>.</span>
+                        <span id="num6">6</span>
+                    </td>
+                    <td>
+                        <span id="add">+</span>
+                    </td>
+                    <td>
+                        <span id="multiply">*</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span id="num7">7</span>
+                    </td>
+                    <td>
+                        <span id="num8">8</span>
+                    </td>
+                    <td>
+                        <span id="num9">9</span>
+                    </td>
+                    <td>
+                        <span id="subtract">-</span>
+                    </td>
+                    <td>
+                        <span id="divide">/</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span id="clear">C</span>
+                    </td>
+                    <td>
+                        <span id="num0">0</span>
+                    </td>
+                    <td>
+                        <span id="decimal">.</span>
                     </td>
                     <td colspan="2">
-                        <span>=</span>
+                        <span id="equal">=</span>
                     </td>
                 </tr>
             </table>
