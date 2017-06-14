@@ -5,12 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Javascript Calculator</title>
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,900" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="calc.css"/>
 </head>
 <body>
     <div class="container">
         <div class="calc-box">
-            <table border="1">
+            <h1>JS calculator</h1>
+            <table>
                 <tr>
                     <td colspan="5" id="display">
                         <span id="result">0</span>
@@ -85,7 +87,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>
+                    <td class="btn-clear">
                         <span id="clear">C</span>
                     </td>
                     <td>
@@ -94,7 +96,7 @@
                     <td>
                         <span id="decimal">.</span>
                     </td>
-                    <td colspan="2">
+                    <td colspan="2" class="btn-equal">
                         <span id="equal">=</span>
                     </td>
                 </tr>
