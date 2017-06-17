@@ -26,17 +26,21 @@ window.onload = function() {
         }
     }
 
-    function clear(display, formula) {
+    function clear(display, formula, msg) {
         display.textContent = 0;
         formula.textContent = 'f';
         formula.className = 'hidden';
+        msg.innerHTML = '';
+        msg.className = 'hidden-error';
         decimalAdded = false;
     }
 
     function prepareFormulaValue(formulaValue) {
         var lastChar = formulaValue.slice(-1);
         formulaValue = formulaValue.replace(/e/g, Math.E).replace(/pi/g, Math.PI).replace(/\^/g, '**');
-        formulaValue = formulaValue.replace(/abs([^\)]+\))/g, 'Math.abs($1)').replace(/sqrt([^\)]+\))/g, 'Math.sqrt($1)');
+        // formulaValue = formulaValue.replace(/abs([^\)]+\))/g, 'Math.abs($1)').replace(/sqrt([^\)]+\))/g, 'Math.sqrt($1)');
+        formulaValue = formulaValue.replace(/abs/g, 'Math.abs').replace(/sqrt/g, 'Math.sqrt');
+        console.log(formulaValue);
 
         if (operators.indexOf(lastChar) > -1 || lastChar == '.')
 			formulaValue = formulaValue.replace(/.$/, '');
@@ -54,7 +58,7 @@ window.onload = function() {
             var msg = document.querySelector('#message');
 
             if (buttonValue === 'C') {
-                clear(display, formula);
+                clear(display, formula, msg);
             }
             else if (formulaValue.slice(-1) === '=') {
                 return null;
@@ -71,7 +75,14 @@ window.onload = function() {
                         changeFormula(buttonValue, formulaValue);
                         if (formulaValue !== 'f') {
                             validFormulaValue = prepareFormulaValue(formulaValue);
-                            display.innerHTML = eval(validFormulaValue);
+                            try {
+                                display.innerHTML = eval(validFormulaValue);
+                            }
+                            catch (e) {
+                                display.innerHTML = 'Error!'
+                                msg.innerHTML = e;
+                                msg.className = 'visible-error';
+                            }
                         }
                         decimalAdded = false;
                         break;
