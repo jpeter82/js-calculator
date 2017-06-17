@@ -11,6 +11,7 @@ window.onload = function() {
             else if (formulaValue === 'f' && buttonValue === '-') {
 				formula.innerHTML = buttonValue;
             }
+            decimalAdded = false;
         }
         else {
             if (formula.innerHTML === 'f' && buttonValue != '=') {
@@ -35,6 +36,8 @@ window.onload = function() {
     function prepareFormulaValue(formulaValue) {
         var lastChar = formulaValue.slice(-1);
         formulaValue = formulaValue.replace(/e/g, Math.E).replace(/pi/g, Math.PI).replace(/\^/g, '**');
+        formulaValue = formulaValue.replace(/abs([^\)]+\))/g, 'Math.abs($1)').replace(/sqrt([^\)]+\))/g, 'Math.sqrt($1)');
+
         if (operators.indexOf(lastChar) > -1 || lastChar == '.')
 			formulaValue = formulaValue.replace(/.$/, '');
         return formulaValue;
@@ -50,46 +53,59 @@ window.onload = function() {
             var buttonValue = this.querySelector('span').textContent;
             var msg = document.querySelector('#message');
 
-            switch (buttonValue) {
-                case 'C':
-                    clear(display, formula);
-                    break;
-                case '.':
-                    if (formulaValue.slice(-1) === '=') {
-                        return null;
-                    }
-
-                    if (!decimalAdded) {
-                        formula.innerHTML += buttonValue;
-                        decimalAdded = true;
-			        }
-                    break;
-                case '=':
-                    if (formulaValue.slice(-1) === '=') {
-                        return null;
-                    }
-
-                    changeFormula(buttonValue, formulaValue);
-                    if (formulaValue !== 'f') {
-                        validFormulaValue = prepareFormulaValue(formulaValue);
-                        display.innerHTML = eval(validFormulaValue);
-                    }
-                    decimalAdded = false;
-                    break;
-                default:
-                    if (formulaValue.slice(-1) === '=') {
-                        return null;
-                    }
-                    changeFormula(buttonValue, formulaValue);
-                    formulaValue = formula.textContent;
-                    if (!(formula.className == 'visible') && formulaValue !== 'f') {
-                        formula.className = 'visible';
-                    }
+            if (buttonValue === 'C') {
+                clear(display, formula);
+            }
+            else if (formulaValue.slice(-1) === '=') {
+                return null;
+            }
+            else {
+                switch (buttonValue) {
+                    case '.':
+                        if (!decimalAdded) {
+                            formula.innerHTML += buttonValue;
+                            decimalAdded = true;
+                        }
+                        break;
+                    case '=':
+                        changeFormula(buttonValue, formulaValue);
+                        if (formulaValue !== 'f') {
+                            validFormulaValue = prepareFormulaValue(formulaValue);
+                            display.innerHTML = eval(validFormulaValue);
+                        }
+                        decimalAdded = false;
+                        break;
+                    case 'abs':
+                        if (formulaValue !== 'f' && operators.indexOf(formulaValue.slice(-1)) == -1) {
+                            formula.textContent = 'abs(' + formulaValue + ')';
+                        }
+                        break;
+                    case 'sqrt':
+                        if (formulaValue !== 'f' && operators.indexOf(formulaValue.slice(-1)) == -1) {
+                            formula.textContent = 'sqrt(' + formulaValue + ')';
+                        }
+                        break;
+                    case 'rnd':
+                        if (formulaValue === 'f') {
+                            formula.textContent = Math.floor(Math.random() * 100) + 1;
+                        }
+                        else if (operators.indexOf(formulaValue.slice(-1)) > -1) {
+                            formula.textContent += Math.floor(Math.random() * 100) + 1;
+                        }
+                        if (!(formula.className == 'visible')) {
+                            formula.className = 'visible';
+                        }
+                        break;
+                    default:
+                        changeFormula(buttonValue, formulaValue);
+                        formulaValue = formula.textContent;
+                        if (!(formula.className == 'visible') && formulaValue !== 'f') {
+                            formula.className = 'visible';
+                        }
+                }
             }
 
 		    event.preventDefault();
         }
     }
 };
-
-
