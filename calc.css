@@ -16,13 +16,18 @@ body {
 
 .calc-box {
     width: 80%;
+    max-width: 800px;
     margin: 0 auto;
     text-align: center;
+	user-select: none;
 }
 
 table {
     margin: 0 auto;
     border-collapse: collapse;
+    table-layout: fixed;
+    max-width: 80%;
+    word-break: break-all;
 }
 
 table td {
@@ -34,6 +39,20 @@ table td {
 
 table td:hover {
     background: rgba(46,64,87, 0.2);
+}
+
+#formula-box {
+    text-align: right;
+    background: rgba(245,138,7,0.6);
+    font-size: 2rem;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.visible {
+    visibility: visible;
 }
 
 #display {
@@ -56,4 +75,8 @@ table td:hover {
 
 .btn-clear:hover {
     background: rgba(242,100,25,0.5);
+}
+
+footer {
+    min-height: 30px;
 }
